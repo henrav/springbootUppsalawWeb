@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mysql:8.0
+    command: [
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_swedish_ci",
+      "--character-set-client-handshake=FALSE",
+      "--init-connect=SET NAMES utf8mb4 COLLATE utf8mb4_swedish_ci"
+    ]
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecret
+      MYSQL_DATABASE: enklarecept
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: mysecret
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pmysecret"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    container_name: springboot
+    build:
+      context: ./uppsalawebb
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: mysecret
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/enklarecept?useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_swedish_ci&sessionVariables=collation_connection=utf8mb4_swedish_ci,character_set_client=utf8mb4"
+
+
+
+volumes:
+  db_data:
