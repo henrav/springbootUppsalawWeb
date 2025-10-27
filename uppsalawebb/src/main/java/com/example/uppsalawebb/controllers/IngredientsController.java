@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin( // allow everyone, all basic methods/headers
+        origins = "*",
+        methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },
+        allowedHeaders = "*"
+)
 @RestController
 @RequestMapping(value = "/api/ingredients", produces = "application/json;charset=UTF-8")
 public class IngredientsController {
