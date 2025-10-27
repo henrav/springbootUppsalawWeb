@@ -28,12 +28,22 @@ public class ReceptController {
     }
 
     // GET /api/recept/{id} -> one recipe (summary)
+
+    @CrossOrigin(
+            origins = "*",
+            methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },
+            allowedHeaders = "*")
     @GetMapping("/{id}")
     public Optional<RecipeSummaryDto> getOne(@PathVariable Long id) {
         return repo.findSummaryByID(id);
     }
 
     // GET /api/recept/detailed/{id} -> one recipe (detailed with ingredients)
+    @CrossOrigin(
+            origins = "*",
+            methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },
+            allowedHeaders = "*"
+    )
     @GetMapping("/detailed/{id}")
     public RecipeDto getDetailed(@PathVariable Long id) {
         return RecipeDto.from(repo.findDetailedByID(id));

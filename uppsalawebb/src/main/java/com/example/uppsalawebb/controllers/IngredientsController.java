@@ -24,11 +24,21 @@ public class IngredientsController {
         this.repo = repo;
     }
 
+    @CrossOrigin(
+            origins = "*",
+            methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },
+            allowedHeaders = "*"
+    )
     @GetMapping
     public List<IngredientDto> getAll(){
         return repo.findAllIngredients();
     }
 
+    @CrossOrigin(
+            origins = "*",
+            methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },
+            allowedHeaders = "*"
+    )
     @GetMapping("/{id}")
     public IngredientDto getByID(@PathVariable Long id){
         return repo.findSpecific(id);
