@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS units (
 )CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci;
 
 -- RECIPE_INGREDIENTS (kopplingstabell) ---------------------------------------
--- “couple” table: (recipe_id, ingredient_id, unit_id, amount)
 CREATE TABLE IF NOT EXISTS recipe_ingredients (
                                                   id            BIGINT AUTO_INCREMENT PRIMARY KEY,
                                                   recipe_id     BIGINT NOT NULL,
@@ -48,7 +47,7 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
                                                   unit_id       BIGINT NULL,
                                                   amount        DECIMAL(8,2) NULL,      -- e.g. 1.5
                                                   note          VARCHAR(255) NULL,      -- e.g. "hackad"
-                                                  position_no   INT NOT NULL DEFAULT 0, -- order in list
+                                                  position_no   INT NOT NULL DEFAULT 0,
                                                   UNIQUE (recipe_id, ingredient_id),
                                                   CONSTRAINT fk_ri_recipe
                                                       FOREIGN KEY (recipe_id) REFERENCES recipes(id)

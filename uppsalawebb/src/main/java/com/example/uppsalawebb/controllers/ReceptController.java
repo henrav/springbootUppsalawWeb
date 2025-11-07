@@ -27,7 +27,6 @@ public class ReceptController {
         return repo.findAllSummary();
     }
 
-    // GET /api/recept/{id} -> one recipe (summary)
 
     @CrossOrigin(
             origins = "*",
@@ -38,7 +37,6 @@ public class ReceptController {
         return repo.findSummaryByID(id);
     }
 
-    // GET /api/recept/detailed/{id} -> one recipe (detailed with ingredients)
     @CrossOrigin(
             origins = "*",
             methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS },

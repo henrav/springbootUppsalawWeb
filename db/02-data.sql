@@ -1,6 +1,5 @@
 INSERT INTO users (first_name, last_name, email) VALUES
-        ('Henrik', 'Ravnborg', 'henrik@ravnborg.se'),
-        ('Anders', 'Ravnborg', 'anders@ravnborg.se');
+        ('Henrik', 'Ravnborg', 'henrik@ravnborg.se');
 
 
 INSERT INTO units(id, name) VALUES
